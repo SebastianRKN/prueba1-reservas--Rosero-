@@ -21,23 +21,44 @@ para tener dónde trabajar con mi grupo.
    reserva queda registrada a mi nombre.
 2. **Dado** que elijo como inicio las 10:00 y como fin las 09:00, **Cuando** intento reservar,
    **Entonces** la reserva se rechaza con el mensaje "La hora de fin debe ser posterior a la de inicio".
+3. **Dado** que la sala A tiene una reserva de 09:00 a 10:00, **Cuando** intento reservarla de
+   09:30 a 10:30, **Entonces** la solicitud se rechaza con el mensaje
+   "La sala ya está reservada en ese horario".
+4. **Dado** que la sala A tiene una reserva de 09:00 a 12:00, **Cuando** intento reservarla de
+   10:00 a 11:00, **Entonces** la solicitud se rechaza con el mensaje
+   "La sala ya está reservada en ese horario".
+5. **Dado** que la sala A tiene una reserva de 10:00 a 11:00, **Cuando** intento reservarla de
+   09:00 a 12:00, **Entonces** la solicitud se rechaza con el mensaje
+   "La sala ya está reservada en ese horario".
+6. **Dado** que la sala A tiene una reserva de 09:00 a 10:00, **Cuando** intento reservarla de
+   10:00 a 11:00, **Entonces** la nueva reserva queda registrada porque los intervalos son
+   consecutivos.
+7. **Dado** que la sala A tiene una reserva de 09:00 a 10:00, **Cuando** intento reservar la sala B
+   de 09:30 a 10:30, **Entonces** la nueva reserva queda registrada porque el solapamiento ocurre
+   en otra sala.
 
 ### Edge Cases
 
-- ¿Qué pasa si la sala ya está ocupada en ese horario?
+- Los intervalos de una reserva incluyen la hora de inicio y excluyen la hora de fin: `[inicio, fin)`.
+- La hora de fin debe ser posterior a la hora de inicio.
+- Dos reservas de la misma sala se solapan cuando comparten algún instante dentro de sus intervalos.
 
 ## Requirements
 
 ### Functional Requirements
 
-- **FR-001**: El estudiante elige una sala, una hora de inicio y una hora de fin.
-- **FR-002**: La pantalla `ReservaPage` usa un `DropdownButton` para las salas y `showTimePicker`
-  para las horas.
-- **FR-003**: El estado del formulario se maneja con `setState` dentro de
-  `lib/presentation/reserva_page.dart`.
-- **FR-004**: La reserva se guarda en la tabla `reservas` de Supabase usando el paquete
-  `supabase_flutter`.
-- **FR-005**: La hora de fin debe ser posterior a la hora de inicio.
+- **FR-001**: El estudiante puede solicitar una reserva indicando una sala y las horas de inicio y
+  fin.
+- **FR-002**: La hora de fin debe ser posterior a la hora de inicio; cada intervalo incluye el
+  inicio y excluye el fin.
+- **FR-003**: El sistema rechaza una solicitud cuyo intervalo se solape con una reserva existente
+  de la misma sala.
+- **FR-004**: Al rechazar una solicitud por solapamiento, el sistema muestra el mensaje
+  "La sala ya está reservada en ese horario".
+- **FR-005**: Los intervalos consecutivos de una misma sala no se consideran solapados.
+- **FR-006**: Las reservas de salas distintas no se consideran solapadas entre sí.
+- **FR-007**: Una solicitud aceptada queda registrada a nombre del estudiante para la sala y el
+  intervalo indicados.
 
 ### Key Entities
 
