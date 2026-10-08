@@ -1,6 +1,6 @@
 # Prompts de la prueba
 
-Transcripcion literal del campo "My request" de los mensajes del usuario, en orden, incluida la respuesta a la aclaracion. Se conservan errores de escritura y solicitudes repetidas. El contexto automatico del IDE y los mensajes tecnicos se conservan en los archivos de sesion del ZIP.
+Transcripcion literal del campo "My request" de los mensajes del usuario, en orden, incluidas las respuestas a aclaraciones. Se conservan errores de escritura y solicitudes repetidas. El contexto automatico del IDE y los mensajes tecnicos se conservan en los archivos de sesion del ZIP.
 
 ## 1. Prompt
 
@@ -98,4 +98,57 @@ continua desde donde te quedaste
 ````text
 aahora has \`RESPUESTAS.md\`, en la raíz del repositorio (lo creas tú) | Tres secciones con estos títulos exactos: \`## Escenarios que elegí y por qué\`, \`## Riesgo más grave del repositorio\`, \`## ¿La regla protege la app real?\`. Cada afirmación cita la evidencia como \`ruta:línea\` (por ejemplo, \`lib/domain/crear_reserva.dart:12\`) y explica qué muestra esa línea. Extensión recomendada: hasta **\*\*400 palabras\*\*** en total. junto con prompts.md\`, en la raíz del repositorio (lo creas tú), y \`sesion-\<apellido>.zip\`, **\*\*fuera\*\*** del repositorio | En \`prompts.md\`, los prompts que le diste al agente, en orden, copiados tal cual. El \`.zip\` tiene los archivos de sesión de Codex de la prueba (ver abajo). **\*\*El \`.zip\` no se sube a GitHub\*\***: solo al aula virtual. |
 
+````
+
+## 14. Prompt
+
+````text
+ahora haz git add RESPUESTAS.md prompts.md
+git commit -m "docs: respuestas y registro de prompts"
+flutter test
+git push -u origin prueba/solapamiento
+
+````
+
+## 15. Prompt
+
+````text
+
+1\. Haz tu último commit (con \`RESPUESTAS.md\` y \`prompts.md\`).
+2\. Sube la rama: \`git push -u origin prueba/solapamiento\`.
+3\. En **\*\*tu\*\*** repositorio de GitHub, abre un pull request de \`prueba/solapamiento\` hacia \`main\`.
+   No hagas merge.
+4\. Genera el archivo de entrega. En la raíz de tu repositorio, cambia \`\<apellido>\` por tu
+   apellido (por ejemplo, \`prueba1-perez.bundle\`):
+
+   \`\`\`bash
+   git bundle create prueba1-\<apellido>.bundle --all
+   \`\`\`
+
+   Ese archivo guarda tu repositorio completo, con todo el historial de commits. \*\*No lo agregues
+   a git\*\*: es lo último que haces.
+5\. Genera \`sesion-\<apellido>.zip\` (ver "Cómo guardar la sesión de Codex").
+6\. Antes de que termine la hora, sube al aula virtual **\*\*los dos archivos\*\***, el \`.bundle\` y el
+   \`.zip\`, y pega en el comentario el enlace de tu repositorio.
+
+**\*\*Se califica el \`.bundle\` que subiste al aula virtual\*\***, tal como estaba a la hora de entrega.
+Lo que cambies en GitHub después no cuenta.
+
+**## Antes de entregar**
+
+\- [ ] Tu repositorio es **\*\*público\*\***.
+\- [ ] La rama \`prueba/solapamiento\` está subida a **\*\*tu\*\*** repositorio.
+\- [ ] Subiste \`prueba1-\<apellido>.bundle\` y \`sesion-\<apellido>.zip\` al aula virtual, con el enlace de tu repositorio en el comentario.
+\- [ ] Hay un pull request abierto hacia \`main\`, sin merge.
+\- [ ] \`flutter test\` termina en verde en el commit final.
+\- [ ] \`RESPUESTAS.md\` y \`prompts.md\` están dentro del último commit de esa rama. El \`.zip\` de la sesión **\*\*no\*\*** está en el repositorio.
+\- [ ] Existen \`specs/001-reservas-sala/spec.md\`, el historial de git y las pruebas de \`CrearReserva\`.
+&#x20;has lo que falta asegurate de vque todo este completo y dame llos archivos que sean ya listos para subir
+
+````
+
+## 16. Respuesta a aclaracion
+
+````text
+Habilitaré el acceso a GitHub
 ````
